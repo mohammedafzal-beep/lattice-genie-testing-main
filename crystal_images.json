@@ -1,0 +1,22 @@
+{
+    "Bravais": [
+        "crystal_img/1Cubic_0.52_200.stl",
+        "img/1bravais_SC.jpg"
+    ],
+    "Inverse Bravais": [
+        "crystal_img/22Inverse_Tetra_1.0_1.0_1.2_0.65_200.stl",
+        "img/26invbravais_triclinic.jpg"
+    ],
+    "Sheet TPMS": [
+        "crystal_img/29Sheet_Primitive_0.0_0.1_200.stl",
+        "img/30Sheet_Scheon_Gyroid.jpg"
+    ],
+    "Skeletal TPMS": [
+        "crystal_img/36Skeletal_P_0.0_200.stl",
+        "img/36skeletal_schwarz_prim.jpg"
+    ],
+    "Strut-based": [
+        "crystal_img/63Truss_FBCCXYZ_0.05_200.stl",
+        "img/63truss_BFCC_XYZ.jpg"
+    ]
+}

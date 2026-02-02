@@ -1,0 +1,12 @@
+
+{"timestamp": "2026-01-29T05:26:49.431960", "username": "82171767", "param_dict": {"r": 0.56, "resolution": 50}, "mode": "Pro mode"}
+{"timestamp": "2026-01-29T05:26:58.020633", "username": "82171767", "param_dict": {"r": 0.56, "resolution": 137}, "mode": "Pro mode"}
+{"timestamp": "2026-01-29T09:45:47.263849", "username": "43954573", "param_dict": {"r": 0.52, "resolution": 50}, "mode": "Pro mode"}
+{"timestamp": "2026-01-29T09:47:06.276352", "username": "43954573", "param_dict": {"C": 0.0, "t": 0.1, "resolution": 50}, "mode": "Pro mode"}
+{"timestamp": "2026-01-29T09:47:13.694794", "username": "43954573", "param_dict": {"C": 0.0, "t": 0.6, "resolution": 50}, "mode": "Pro mode"}
+{"timestamp": "2026-01-29T09:48:19.005736", "username": "24711872", "param_dict": {"C": 0.0, "t": 0.1, "resolution": 168}, "mode": "Chat mode"}
+{"timestamp": "2026-01-29T10:04:01.725498", "username": "68626148", "param_dict": {"r": 0.52, "resolution": 50}, "mode": "Pro mode"}
+{"timestamp": "2026-01-29T10:04:11.343988", "username": "68626148", "param_dict": {"C": 0.0, "t": 0.1, "resolution": 50}, "mode": "Pro mode"}
+{"timestamp": "2026-01-29T10:04:37.536127", "username": "68626148", "param_dict": {"C": 0.0, "t": 0.1, "resolution": 119}, "mode": "Pro mode"}
+{"timestamp": "2026-01-29T10:09:24.518521", "username": "68626148", "param_dict": {"C": 0.0, "resolution": 119}, "mode": "Pro mode"}
+{"timestamp": "2026-01-31T08:34:40.587849", "username": "68626148", "param_dict": {"r": 0.52, "resolution": 50}, "mode": "Pro mode"}

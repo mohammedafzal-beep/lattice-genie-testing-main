@@ -1,0 +1,15 @@
+{
+    "a": "Lattice constant a ",
+    "b": "Lattice constant b",
+    "c": "Lattice constant c ",
+    "C": "Level set constant",
+    "t": "Sheet thickness ",
+    "d": "Distance between two sheets ",
+    "r": "Atomic radius ",
+    "alpha": "Angle between b and c",
+    "beta": "Angle between a and c",
+    "gamma": "Angle between a and b",
+    "fcc_atom_radius": "Radius of atoms at face centers in FCC ",
+    "centre_atom_radius": "Radius of center atom in BCC ",
+    "resolution": "Decrease res for faster gen"
+}

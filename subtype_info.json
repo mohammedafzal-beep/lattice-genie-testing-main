@@ -1,0 +1,531 @@
+{
+    "Bravais": {
+        "description": "Explore fundamental crystal lattice systems categorized by symmetry and unit cell geometry, foundational to materials science.",
+        "items": [
+            [
+                "Simple Cubic",
+                [
+                    "./def/1Cubic_0.52_200.stl",
+                    "./img/1bravais_SC.jpg"
+                ],
+                "Offers moderate mechanical strength and stiffness due to its low packing density,          making it less commonly used in high-strength applications"
+            ],
+            [
+                "Face-Centered Cubic",
+                [
+                    "./def/2Cubic_FCC_0.45_200.stl",
+                    "./img/2bravais_FCC.jpg"
+                ],
+                "Provides excellent ductility and high fatigue resistance,          ideal for applications requiring substantial deformation without failure."
+            ],
+            [
+                "Body-Centered Cubic",
+                [
+                    "./def/3Cubic_BCC_0.40_200.stl",
+                    "./img/3bravais_BCC.jpg"
+                ],
+                "Balances strength and ductility, exhibiting a notable temperature-dependent          behavior that influences its toughness and brittleness."
+            ],
+            [
+                "Simple Orthorhombic",
+                [
+                    "./def/4Cubic_Ortho_1.0_1.2_1.3_0.70_200.stl",
+                    "./img/4bravais_SimpOrtho.jpg"
+                ],
+                "Exhibits directional mechanical properties with varying stiffness and strength          along its three unequal axes, allowing for tailored structural applications. "
+            ],
+            [
+                "Base-Centered Orthorhombic",
+                [
+                    "./def/5Ortho_Basecent_1.0_1.3_0.8_0.37_0.47_200.stl",
+                    "./img/5bravais_BaseCentOrtho.jpg"
+                ],
+                "Provides enhanced shear strength along its base-centered planes,          making it suitable for applications requiring anisotropic load-bearing capacity. "
+            ],
+            [
+                "Face-Centered Orthorhombic",
+                [
+                    "./def/6Ortho_FCC_1.0_1.2_1.2_0.40_0.47_200.stl",
+                    "./img/6bravais_FCOrtho.jpg"
+                ],
+                "Rare in artificial structures, potentially offering uniform stress          distribution across faces for isotropic mechanical properties in the orthorhombic system."
+            ],
+            [
+                "Body-Centered Orthorhombic",
+                [
+                    "./def/7Ortho_BCC_1.0_1.2_1.3_0.50_0.53_200.stl",
+                    "./img/7bravais_BCOrtho.jpg"
+                ],
+                "Features a central connectivity that can contribute to a balanced           combination of compressive strength and ductility, adaptable for materials requiring complex stress responses."
+            ],
+            [
+                "Simple Tetragonal",
+                [
+                    "./def/8Tetra_1.0_1.2_0.65_200.stl",
+                    "./img/8BRavais_SimpTetra.jpg"
+                ],
+                "Exhibits unique directional mechanical properties due to its two equal lateral          dimensions and a distinct vertical dimension, allowing for tailored stiffness and strength along the axis of          elongation."
+            ],
+            [
+                "Body-Centered Tetragonal",
+                [
+                    "./def/9Tetra__BCC_1.0_1.4_0.50_0.55_200.stl",
+                    "./img/9bravais_BCTetra.jpg"
+                ],
+                "Provides enhanced structural stability and potential for higher          strength due to the additional atom at the center of the unit cell, influencing the material's          response to compression and tension."
+            ],
+            [
+                "Simple Monoclinic",
+                [
+                    "./def/10Mono_1.0_1.2_1.3_0.67_100_90_90_200.stl",
+                    "./img/10bravais_SimpMino.jpg"
+                ],
+                "Characterized by its inherent asymmetry, it offers directional          mechanical properties with varying stiffness and strength due to the unique angle between lattice          vectors, enabling applications requiring anisotropic behavior."
+            ],
+            [
+                "Base-Centered Monoclinic",
+                [
+                    "./def/11Mono_Basecent_1.0_1.3_0.8_0.47_0.37_100_90_90_200.stl",
+                    "./img/11bravais_BaseCentMono.jpg"
+                ],
+                "Enhances shear strength along its base-centered planes,          providing a combination of flexibility and rigidity suited for materials that undergo complex stress          patterns."
+            ],
+            [
+                "Triclinic",
+                [
+                    "./def/12Triclinic_1.2_1.2_1.3_0.68_90_95_100_200.stl",
+                    "./img/12bravais_triclinic.jpg"
+                ],
+                "Artificial Bravais triclinic lattice structures exhibit highly anisotropic          mechanical properties due to their lack of symmetry, with nonequal axes and angles, allowing for          unique customization of stiffness, strength, and deformation behavior under stress."
+            ],
+            [
+                "Rhombohedral",
+                [
+                    "./def/13Rhombo_1.5_1.5_1.5_0.65_100_100_100_200.stl",
+                    "./img/13bravais_rhombo.jpg"
+                ],
+                "Artificial Bravais rhombohedral lattice structures, with their three          equal axes and identical angles not equal to 90 degrees, offer isotropic mechanical properties in three          dimensions, leading to uniform strength, stiffness, and potential for high ductility."
+            ],
+            [
+                "Hexagonal",
+                [
+                    "./def/14Hexa_1.4_1.4_1.5_0.75_90_90_100_200.stl",
+                    "./img/14bravais_Hexa.jpg"
+                ],
+                "Artificial Bravais hexagonal lattice structures are known for their high          in-plane strength and stiffness due to close packing, along with excellent resistance to compression          and shear, making them ideal for lightweight and high-strength applications."
+            ]
+        ]
+    },
+    "Inverse Bravais": {
+        "description": "Explore inverse Bravais lattices, characterized by their unique geometric arrangements and mechanical properties.",
+        "items": [
+            [
+                "Simple Cubic",
+                [
+                    "./def/15Inverse_0.60_200.stl",
+                    "./img/15invbravais_SC.jpg"
+                ],
+                "Offers moderate mechanical strength and stiffness due to its low packing density,          making it less commonly used in high-strength applications"
+            ],
+            [
+                "Face-Centered Cubic",
+                [
+                    "./def/16Inverse_FCC_0.35_0.40_200.stl",
+                    "./img/16invbravais_FCC.jpg"
+                ],
+                "Provides excellent ductility and high fatigue resistance,          ideal for applications requiring substantial deformation without failure."
+            ],
+            [
+                "Body-Centered Cubic",
+                [
+                    "./def/17Inverse_BCC_0.50_0.40_200.stl",
+                    "./img/17invbravais_BCC.jpg"
+                ],
+                "Balances strength and ductility, exhibiting a notable temperature-dependent          behavior that influences its toughness and brittleness."
+            ],
+            [
+                "Simple Orthorhombic",
+                [
+                    "./def/18Inverse_CubicOrtho_1.0_1.2_1.3_0.70_200.stl",
+                    "./img/18invbravais_SimpOrtho.jpg"
+                ],
+                "Exhibits directional mechanical properties with varying stiffness and strength          along its three unequal axes, allowing for tailored structural applications. "
+            ],
+            [
+                "Base-Centered Orthorhombic",
+                [
+                    "./def/19Inverse_ortho_Basecent_1.0_1.3_0.8_0.47_0.37_200.stl",
+                    "./img/19invbravais_BaseCentOrtho.jpg"
+                ],
+                "Features a central connectivity that can contribute to a balanced           combination of compressive strength and ductility, adaptable for materials requiring complex stress responses."
+            ],
+            [
+                "Face-Centered Orthorhombic",
+                [
+                    "./def/20Inverse_ortho_FCC_1.0_1.2_1.2_0.50_0.42_200.stl",
+                    "./img/20invbravais_FCOrtho.jpg"
+                ],
+                "Rare in artificial structures, potentially offering uniform stress          distribution across faces for isotropic mechanical properties in the orthorhombic system."
+            ],
+            [
+                "Body-Centered Orthorhombic",
+                [
+                    "./def/21Inverse_ortho_BCC_1.0_1.2_1.3_0.58_0.49_200.stl",
+                    "./img/21invbravais_BCOrtho.jpg"
+                ],
+                "Features a central connectivity that can contribute to a balanced           combination of compressive strength and ductility, adaptable for materials requiring complex stress responses."
+            ],
+            [
+                "Simple Tetragonal",
+                [
+                    "./def/22Inverse_Tetra_1.0_1.0_1.2_0.65_200.stl",
+                    "./img/22invbravais_SimpTetra.jpg"
+                ],
+                "Exhibits unique directional mechanical properties due to its two equal lateral          dimensions and a distinct vertical dimension, allowing for tailored stiffness and strength along the axis of          elongation."
+            ],
+            [
+                "Body-Centered Tetragonal",
+                [
+                    "./def/23Inverse_Tetra_BCC_1.0_1.0_1.4_0.55_0.45_200.stl",
+                    "./img/23invbravais_BCTetrs.jpg"
+                ],
+                "Provides enhanced structural stability and potential for higher          strength due to the additional atom at the center of the unit cell, influencing the material's          response to compression and tension."
+            ],
+            [
+                "Simple Monoclinic",
+                [
+                    "./def/24Inverse_Mono_1.0_1.2_1.3_0.65_100_90_90_200.stl",
+                    "./img/24invbravais_SimpMono.jpg"
+                ],
+                "Characterized by its inherent asymmetry, it offers directional          mechanical properties with varying stiffness and strength due to the unique angle between lattice          vectors, enabling applications requiring anisotropic behavior."
+            ],
+            [
+                "Base-Centered Monoclinic",
+                [
+                    "./def/25Inverse_Mono_Basecent_1.0_1.3_0.8_0.47_0.37_100_90_90_200.stl",
+                    "./img/25invbravais_BaseCentMono.jpg"
+                ],
+                "Enhances shear strength along its base-centered planes,          providing a combination of flexibility and rigidity suited for materials that undergo complex stress          patterns."
+            ],
+            [
+                "Triclinic",
+                [
+                    "./def/26Inverse_Triclinic_1.0_1.2_1.3_0.68_90_95_100_200.stl",
+                    "./img/26invbravais_triclinic.jpg"
+                ],
+                "Artificial Bravais triclinic lattice structures exhibit highly anisotropic        mechanical properties due to their lack of symmetry, with nonequal axes and angles, allowing for         unique customization of stiffness, strength, and deformation behavior under stress."
+            ],
+            [
+                "Rhombohedral",
+                [
+                    "./def/27Inverse_Rhombo_1.5_1.5_1.5_0.78_100_100_100_200.stl",
+                    "./img/27invbravais_rhombo.jpg"
+                ],
+                "Artificial Bravais rhombohedral lattice structures, with their three          equal axes and identical angles not equal to 90 degrees, offer isotropic mechanical properties in three          dimensions, leading to uniform strength, stiffness, and potential for high ductility."
+            ],
+            [
+                "Hexagonal",
+                [
+                    "./def/28Inverse_Hexa_1.4_1.4_1.5_0.78_90_90_100_200.stl",
+                    "./img/28invbravais_hexa.jpg"
+                ],
+                "Artificial Bravais hexagonal lattice structures are known for their high          in-plane strength and stiffness due to close packing, along with excellent resistance to compression          and shear, making them ideal for lightweight and high-strength applications."
+            ]
+        ]
+    },
+    "Sheet TPMS": {
+        "description": "Triply periodic minimal surfaces with thin walls forming periodic sheets, offering excellent mechanical efficiency.",
+        "items": [
+            [
+                "Schwarz Primitive",
+                [
+                    "./def/29Sheet_Primitive_0.0_0.1_200.stl",
+                    "./img/29sheet_schwarz_prim.jpg"
+                ],
+                "Offers a straightforward, interconnected sheet structure that provides a          good balance between flexibility and structural integrity, suitable for applications requiring moderate mechanical          strength and high surface area."
+            ],
+            [
+                "Scheon Gyroid",
+                [
+                    "./def/30Sheet_Gyroid_0.0_0.1_200.stl",
+                    "./img/30Sheet_Scheon_Gyroid.jpg"
+                ],
+                "Renowned for its intricate, continuous surface that yields isotropic          mechanical properties, making it ideal for applications demanding uniform strength, stiffness, and energy          absorption capabilities."
+            ],
+            [
+                "Schwarz Diamond",
+                [
+                    "./def/31Sheet_D_0.0_200.stl",
+                    "./img/31sheet_schwarz_dia.jpg"
+                ],
+                "Features a diamond-like sheet structure that combines high mechanical          strength and resilience, suitable for robust structural applications where high stiffness and energy dissipation          are required."
+            ],
+            [
+                "Scheon I-WP",
+                [
+                    "./def/32Sheet_IWP_0.0_200.stl",
+                    "./img/32Sheet_IWP.jpg"
+                ],
+                "Characterized by its complex, interwoven sheet structure, providing unique deformation          characteristics and energy absorption properties, ideal for impact-resistant and vibration-damping applications."
+            ],
+            [
+                "Fischer Koch Surface",
+                [
+                    "./def/33Sheet_FKS_0.0_200.stl",
+                    "./img/33sheet_fks.jpg"
+                ],
+                "Exhibits a skeletal sheet structure with high porosity and surface area,          offering excellent properties for lightweight applications and efficient fluid flow, making it suitable for filtration          and heat exchange systems"
+            ],
+            [
+                "Schoen F-RD",
+                [
+                    "./def/34Sheet_FRD_0.0_200.stl",
+                    "./img/34Sheet_Scheon_FRD.jpg"
+                ],
+                "Known for its highly connected, complex sheet topology, offering a combination of          mechanical robustness and flexibility, making it suitable for advanced engineering applications requiring dynamic          mechanical performance. "
+            ],
+            [
+                "Sheet Neovius",
+                [
+                    "./def/35Sheet_N_0.0_200.stl",
+                    "./img/35sheet_neovius.jpg"
+                ],
+                "Features a robust, high-surface-area sheet structure, providing exceptional mechanical          stability and potential for multifunctional applications, including biomaterial scaffolds and advanced porous materials."
+            ]
+        ]
+    },
+    "Skeletal TPMS": {
+        "description": "Network-like structures based on TPMS geometry, ideal for lightweight and mechanically optimized applications.",
+        "items": [
+            [
+                "Skeletal Schwarz Primitive",
+                [
+                    "./def/36Skeletal_P_0.0_200.stl",
+                    "./img/36skeletal_schwarz_prim.jpg"
+                ],
+                "Offers a straightforward, interconnected sheet structure that provides a          good balance between flexibility and structural integrity, suitable for applications requiring moderate mechanical          strength and high surface area."
+            ],[
+                "Inverted Schwarz Primitive",
+                [
+                    "./def/48Inverted_Primitive_200_inverted_c_0.0.stl",
+                    "./img/36skeletal_schwarz_prim.jpg"
+                ],
+                "Offers a straightforward, interconnected sheet structure that provides a          good balance between flexibility and structural integrity, suitable for applications requiring moderate mechanical          strength and high surface area."
+            ],
+            [
+                "Scheon Gyroid",
+                [
+                    "./def/37Skeletal_Gyroid_0.0_200.stl",
+                    "./img/37skeletal_scheon_gyroid.jpg"
+                ],
+                "Renowned for its intricate, continuous surface that yields isotropic          mechanical properties, making it ideal for applications demanding uniform strength, stiffness, and energy          absorption capabilities."
+            ],[
+                "Inverted Gyroid",
+                [
+                    "./def/45Inverted_Gyroid_200_inverted_c_0.0.stl",
+                    "./img/37skeletal_scheon_gyroid.jpg"
+                ],
+                "Renowned for its intricate, continuous surface that yields isotropic          mechanical properties, making it ideal for applications demanding uniform strength, stiffness, and energy          absorption capabilities."
+            ],
+            [
+                "Skeletal Schwarz Diamond",
+                [
+                    "./def/38Skeletal_D_0.0_200.stl",
+                    "./img/38skeletal_schwarz_diamond.jpg"
+                ],
+                "Features a diamond-like sheet structure that combines high mechanical          strength and resilience, suitable for robust structural applications where high stiffness and energy dissipation          are required."
+            ], [
+                "Inverted Schwarz Diamond",
+                [
+                    "./def/43Inverted_Diamond_200_inverted_c_0.0.stl",
+                    "./img/38skeletal_schwarz_diamond.jpg"
+                ],
+                "Features a diamond-like sheet structure that combines high mechanical          strength and resilience, suitable for robust structural applications where high stiffness and energy dissipation          are required."
+            ],
+            [
+                "Scheon I-WP",
+                [
+                    "./def/39Skeletal_IWP_0.0_200.stl",
+                    "./img/39skeletal_scheon_iwp.jpg"
+                ],
+                "Characterized by its complex, interwoven sheet structure, providing unique deformation          characteristics and energy absorption properties, ideal for impact-resistant and vibration-damping applications."
+            ], [
+                "Inverted I-WP",
+                [
+                    "./def/46Inverted_IWP_200_inverted_c_0.0.stl",
+                    "./img/39skeletal_scheon_iwp.jpg"
+                ],
+                "Characterized by its complex, interwoven sheet structure, providing unique deformation          characteristics and energy absorption properties, ideal for impact-resistant and vibration-damping applications."
+            ],
+            [
+                "Skeletal Fischer Koch Surface",
+                [
+                    "./def/40Skeletal_FKS_0.0_200.stl",
+                    "./img/40skeletal_fks.jpg"
+                ],
+                "Exhibits a skeletal sheet structure with high porosity and surface area,          offering excellent properties for lightweight applications and efficient fluid flow, making it suitable for filtration          and heat exchange systems"
+            ],[
+                "Inverted Fischer Koch Surface",
+                [
+                    "./def/49Inverted_FKS_200_inverted_c_0.0.stl",
+                    "./img/40skeletal_fks.jpg"
+                ],
+                "Exhibits a skeletal sheet structure with high porosity and surface area,          offering excellent properties for lightweight applications and efficient fluid flow, making it suitable for filtration          and heat exchange systems"
+            ],
+            [
+                "Schoen F-RD",
+                [
+                    "./def/41Skeletal_FRD_0.0_200.stl",
+                    "./img/41skeletal_scheon_fbd.jpg"
+                ],
+                "Known for its highly connected, complex sheet topology, offering a combination of          mechanical robustness and flexibility, making it suitable for advanced engineering applications requiring dynamic          mechanical performance. "
+            ],[
+                "Inverted F-RD",
+                [
+                    "./def/44Inverted_FRD_200_inverted_c_0.0.stl",
+                    "./img/41skeletal_scheon_fbd.jpg"
+                ],
+                "Known for its highly connected, complex sheet topology, offering a combination of          mechanical robustness and flexibility, making it suitable for advanced engineering applications requiring dynamic          mechanical performance. "
+            ],
+            
+            [
+                "Skeletal Neovius",
+                [
+                    "./def/42Skeletal_Neovius_0.0_200.stl",
+                    "./img/42skeletal_neovius.jpg"
+                ],
+                "Features a robust, high-surface-area sheet structure, providing exceptional mechanical          stability and potential for multifunctional applications, including biomaterial scaffolds and advanced porous materials."
+            ],
+             [
+                "Inverted Neovius",
+                [
+                    "./def/47Inverted_Neovius_200_inverted_c_0.0.stl",
+                    "./img/42skeletal_neovius.jpg"
+                ],
+                "Features a robust, high-surface-area sheet structure, providing exceptional mechanical          stability and potential for multifunctional applications, including biomaterial scaffolds and advanced porous materials."
+            ]
+            
+           
+          
+            
+            
+        ]
+    },
+    "Strut-based": {
+        "description": "Lattices constructed using repeating struts, commonly used in mechanical metamaterials and 3D-printed frameworks.",
+        "items": [
+            [
+                "Cubic",
+                [
+                    "./def/50Truss_Cubic_0.05_200.stl",
+                    "./img/50truss_cubic.jpg"
+                ],
+                "Exhibits fundamental geometric simplicity, providing isotropic mechanical properties with moderate      strength and stiffness, suitable for basic structural applications."
+            ],
+            [
+                "Body-Centered Cubic",
+                [
+                    "./def/51Truss_BCC_0.05_200.stl",
+                    "./img/51truss_BCC.jpg"
+                ],
+                "Offers enhanced strength and energy absorption due to the central strut, making it      suitable for applications requiring high impact resistance"
+            ],
+            [
+                "Body-Face-Centered Cubic",
+                [
+                    "./def/52Truss_BFCC_0.05_200.stl",
+                    "./img/52truss_BFCC.jpg"
+                ],
+                "Combines the benefits of BCC and FCC, providing a balance of strength, stiffness, and ductility, ideal for versatile structural applications. "
+            ],
+            [
+                "Octet",
+                [
+                    "./def/53Truss_Octet_0.05_200.stl",
+                    "./img/53truss_octet.jpg"
+                ],
+                "Features a highly efficient use of material for maximum strength-to-weight ratio, making it ideal      for lightweight, high-strength structures."
+            ],
+            [
+                "All Face Centered Cubic",
+                [
+                    "./def/54Truss_AFCC_0.05_200.stl",
+                    "./img/54truss_AFCC.jpg"
+                ],
+                "Provides uniform distribution of struts for isotropic mechanical properties,      including high stiffness and strength, suitable for load-bearing applications"
+            ],
+            [
+                "Iso Truss",
+                [
+                    "./def/55Truss_Iso_0.05_200.stl",
+                    "./img/55truss_iso.jpg"
+                ],
+                "Exhibits a three-dimensional isotropic truss structure, offering excellent strength and stiffness      with minimal material use, ideal for aerospace and automotive applications"
+            ],
+            [
+                "Body-Centered Cubic with Z strut",
+                [
+                    "./def/56Truss_BCCZ_0.05_200.stl",
+                    "./img/56truss_BCC_Z.jpg"
+                ],
+                "Enhances the BCC structure with additional Z-axis struts, improving      stability and load-bearing capacity, suitable for multidirectional force applications."
+            ],
+            [
+                "Tetrahedron-based",
+                [
+                    "./def/57Truss_Tetra_0.05_200.stl",
+                    "./img/57truss_tetra.jpg"
+                ],
+                "Utilizes the inherent strength of the tetrahedral geometry, providing excellent      stiffness and strength-to-weight ratio, ideal for space frames and other lightweight structures"
+            ],
+            [
+                "Face-Centered Cubic",
+                [
+                    "./def/58Truss_FCC_0.05_200.stl",
+                    "./img/58truss_FCC.jpg"
+                ],
+                "Known for its close-packed structure, offering high ductility and shear strength,      making it suitable for materials requiring high deformation capabilities."
+            ],
+            [
+                "Face-Centered Cubic with Z strut",
+                [
+                    "./def/59Truss_FCCZ_0.05_200.stl",
+                    "./img/59truss_fcc_z.jpg"
+                ],
+                "Augments FCC's ductility with Z-axis struts for improved stability and      strength, ideal for dynamic loading conditions"
+            ],
+            [
+                "G7",
+                [
+                    "./def/60Truss_G7_0.05_200.stl",
+                    "./img/60truss_G7.jpg"
+                ],
+                "Features a unique geometry that optimizes material distribution for enhanced mechanical performance,  suitable for advanced engineering applications requiring optimized strength and stiffness"
+            ],
+            [
+                "Octahedron",
+                [
+                    "./def/61Truss_Octa_0.05_200.stl",
+                    "./img/61truss_Octa.jpg"
+                ],
+                "Utilizes the strong octahedral geometry, providing a good balance of strength and material      efficiency, suitable for applications requiring robust structural components."
+            ],
+            [
+                "Cuboctahedral Body-Face-Centered Cubic",
+                [
+                    "./def/62Truss_FBCCZ_0.05_200.stl",
+                    "./img/62truss_Cubo.jpg"
+                ],
+                "Combines cubic and octahedral geometries for improved mechanical      properties, including strength and resilience, suitable for complex structural applications."
+            ],
+            [
+                "Face-Centered Cubic with X, Y, and Z strut",
+                [
+                    "./def/63Truss_FBCCXYZ_0.05_200.stl",
+                    "./img/63truss_BFCC_XYZ.jpg"
+                ],
+                "Enhanced FCC structure with truss struts in all three spatial      directions."
+            ]
+        ]
+    }
+}

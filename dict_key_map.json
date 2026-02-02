@@ -1,0 +1,78 @@
+{
+  "1": "Bravais Simple Cubic",
+  "2": "Bravais Face-Centered Cubic (FCC)",
+  "3": "Bravais Body-Centered Cubic (BCC)",
+
+  "4": "Bravais Simple Orthorhombic",
+  "5": "Bravais Base-Centered Orthorhombic",
+  "6": "Bravais Face-Centered Orthorhombic",
+  "7": "Bravais Body-Centered Orthorhombic",
+
+  "8": "Bravais Simple Tetragonal",
+  "9": "Bravais Body-Centered Tetragonal",
+
+  "10": "Bravais Simple Monoclinic",
+  "11": "Bravais Base-Centered Monoclinic",
+
+  "12": "Bravais Triclinic",
+  "13": "Bravais Rhombohedral",
+  "14": "Bravais Hexagonal",
+
+  "15": "Inverse Simple Cubic",
+  "16": "Inverse Face-Centered Cubic",
+  "17": "Inverse Body-Centered Cubic",
+
+  "18": "Inverse Simple Orthorhombic",
+  "19": "Inverse Base-Centered Orthorhombic",
+  "20": "Inverse Face-Centered Orthorhombic",
+  "21": "Inverse Body-Centered Orthorhombic",
+
+  "22": "Inverse Simple Tetragonal",
+  "23": "Inverse Body-Centered Tetragonal",
+
+  "24": "Inverse Simple Monoclinic",
+  "25": "Inverse Base-Centered Monoclinic",
+
+  "26": "Inverse Rhombohedral",
+  "27": "Inverse Triclinic",
+  "28": "Inverse Hexagonal",
+
+  "29": "Schwarz Primitive (P) Sheet-Based TPMS",
+  "30": "Schoen Gyroid (G) Sheet-Based TPMS",
+  "31": "Schwarz Diamond (D) Sheet-Based TPMS",
+  "32": "Schoen IWP Sheet-Based (W) TPMS",
+  "33": "Fischer-Koch S (FKS) Sheet-Based TPMS",
+  "34": "Schoen F-RD (FRD) Sheet-Based TPMS",
+  "35": "Neovius Sheet-Based TPMS",
+
+  "36": "Schwarz Primitive (P) Skeletal TPMS",
+  "37": "Schoen Gyroid (G) Skeletal TPMS",
+  "38": "Schwarz Diamond (D) Skeletal TPMS",
+  "39": "Schoen IWP (W) Skeletal TPMS",
+  "40": "Fischer-Koch S (FKS) Skeletal TPMS",
+  "41": "Schoen F-RD (FRD) Skeletal TPMS",
+  "42": "Neovius Skeletal TPMS",
+
+  "43": "Inverted Diamond Skeletal TPMS",
+  "44": "Inverted FRD Skeletal TPMS",
+  "45": "Inverted Gyroid Skeletal TPMS",
+  "46": "Inverted IWP Skeletal TPMS",
+  "47": "Inverted Neovius Skeletal TPMS",
+  "48": "Inverted Primitive Skeletal TPMS",
+  "49": "Inverted FKS Skeletal TPMS",
+
+  "50": "Truss Cubic",
+  "51": "Truss Body-Centered Cubic (BCC)",
+  "52": "Truss Body-Face-Centered Cubic (BFCC)",
+  "53": "Truss Octet Truss",
+  "54": "Truss All Face-Centered Cubic (AFCC)",
+  "55": "Truss Iso Truss",
+  "56": "Truss Body-Centered Cubic with Z strut (BCCZ)",
+  "57": "Truss Tetrahedron-Based",
+  "58": "Truss Face-Centered Cubic (FCC)",
+  "59": "Truss Face-Centered Cubic with Z strut (FCCZ)",
+  "60": "Truss G7",
+  "61": "Truss Octahedron",
+  "62": "Truss Cuboctahedral Body-Centered Cubic",
+  "63": "Truss Body-Face-Centered Cubic with X, Y, and Z strut (FBCCXYZ)"
+}

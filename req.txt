@@ -1,0 +1,10 @@
+streamlit-stl
+streamlit
+scikit-image
+openai
+pillow
+numpy-stl
+numpy
+pydrive2
+pyvista
+vtk

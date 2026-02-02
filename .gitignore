@@ -1,0 +1,10 @@
+venv/
+*.pyc
+__pycache__/
+~$*
+test.py
+.venv/
+def/
+crystal_img/
+*.stl
+service_account.json
