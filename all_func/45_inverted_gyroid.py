@@ -17,10 +17,7 @@ def Inverted_Gyroid(C, a1,a2, resolution = 200, folder='all_files'):
     filename = f"45Inverted_TPMS_Gyroid_{C:.2f}_{a1}_{a2}.stl"  # Format filename with the c value
     cached_file = create_stl_from_mesh(V,F,folder,filename)
     return cached_file
-        def gyroid_function(x, y, z, scale=1, c=1.0):
-        """Gyroid function."""
-        return np.sin(x * scale) * np.cos(y * scale) + np.sin(y * scale) * np.cos(z * scale) + np.sin(z * scale) * np.cos(x * scale)-c
-        
+       
     def generate_solid_volume(size, resolution, scale, c):
         """Generate a mesh for the solid volume on one side of the gyroid surface within a cube."""
         x = np.linspace(-size / 2, size / 2, num=resolution)

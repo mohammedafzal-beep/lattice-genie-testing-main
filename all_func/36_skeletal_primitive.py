@@ -2,10 +2,15 @@ import numpy as np
 from stl import mesh
 from skimage import measure
 import os
-def Skeletal_Primitive(C,    resolution = 200, folder='all_files'):
-    def primitive_function(x, y, z, scale=1, c=1.0):
-        return np.cos(z * scale) + np.cos(y * scale) + np.cos(x * scale)-c
-
+def Skeletal_Primitive(C,a1,a2, resolution = 200, folder='all_files'):
+    V, F = generate_iso_mesh(size, resolution, scale, C, kind='p', mode='skeletal')
+    V = snap_to_cube_planes(V, SNAP_TOL)
+    V, F = decimate_and_clean(V, F, MAX_TRIS_FOR_STEP)
+    V, F = build_end_caps(V, F, tol=SNAP_TOL, kind='p', direction='normal',mode='skeletal')
+    rotate(V,a1,a2,0) 
+    filename = f"36Skeletal_Primitive_{C:.2f}_{a1}_{a2}.stl"  # Format filename with the c value
+    cached_file = create_stl_from_mesh(V,F,folder,filename)
+    return cached_file   
     def generate_solid_volume(size, resolution, scale, c):
         x = np.linspace(-size / 2, size / 2, num=resolution)
         y = np.linspace(-size / 2, size / 2, num=resolution)

@@ -212,7 +212,7 @@ def labeled_slider(param_key, cfg, current_params):
         C_val = current_params.get("C")
 
         min_val, max_val, step = range_func(C_val)
-     else:
+      else:
             r = current_params.get('r')
             min_val, max_val, step = range_func(r)
       
@@ -221,10 +221,14 @@ def labeled_slider(param_key, cfg, current_params):
       min_val = cfg.get("min")
       max_val = cfg.get("max")
       step = cfg.get("step", 0.01)
-  default_val = cfg.get("default", min_val)
+ 
+  if param_key == 'direction':
+    return st.sidebar.selectbox("Direction", ('normal','reverse'))
+  
+  default_val = cfg.get("default")
   prev_val = st.session_state.get(param_key, current_params.get(param_key, default_val))
-  clamped_val = max(cfg.get("min", 0), min(prev_val, cfg.get("max", 1)))
-  st.session_state[param_key] = clamped_val  # store current value
+  #clamped_val = max(cfg.get("min"), min(prev_val, cfg.get("max")))
+  st.session_state[param_key] = default_val  # store current value
   st.markdown("""
 <style>
 /* Slider label spacing */
@@ -233,13 +237,11 @@ div[data-testid="stSlider"] label {
 
 </style>
 """, unsafe_allow_html=True)
-  if param_key == 'direction':
-    return st.sidebar.selectbox("Direction", ('normal','reverse'))
   return st.sidebar.slider(
         label=label,
         min_value=min_val,
         max_value=max_val,
-        value=clamped_val,
+        value=default_val,
         step=step,
         key=param_key,
         help=help_text,

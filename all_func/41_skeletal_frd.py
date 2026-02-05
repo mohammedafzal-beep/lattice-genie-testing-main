@@ -16,9 +16,7 @@ def Skeletal_FRD(C, a1,a2, resolution = 200, folder='all_files'):
     rotate(V,a1,a2,0) 
     filename = f"41skeletal_TPMS_FRD_{C:.2f}_{a1}_{a2}.stl"  # Format filename with the c value
     cached_file = create_stl_from_mesh(V,F,folder,filename)
-    return cached_file    def FRD_function(x, y, z, scale=1, c=1.0):
-        return 4 * np.cos(x * scale) * np.cos(y * scale) * np.cos(z * scale) - np.cos(2 * x * scale) * np.cos(2 * y * scale) - np.cos(2 * y * scale) * np.cos(2 * z * scale) - np.cos(2 * z * scale) * np.cos(2 * x * scale)-c
-        
+    return cached_file    
     def generate_solid_volume(size, resolution, scale, c):
         x = np.linspace(-size / 2, size / 2, num=resolution)
         y = np.linspace(-size / 2, size / 2, num=resolution)

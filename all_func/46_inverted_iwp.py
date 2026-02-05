@@ -16,9 +16,7 @@ def Inverted_IWP(C, a1,a2, resolution = 200, folder='all_files'):
     rotate(V,a1,a2,0) 
     filename = f"46Inverted_IWP_{C:.2f}_{a1}_{a2}.stl"  # Format filename with the c value
     cached_file = create_stl_from_mesh(V,F,folder,filename)
-    return cached_file    def IWP_function(x, y, z, scale=1, c=1.0):
-        return np.cos(2 * x * scale) + np.cos(2 * y * scale) + np.cos(2 * z * scale) - 2 * np.cos(x * scale) * np.cos(y * scale) - 2 * np.cos(y * scale) * np.cos(z * scale) - 2 * np.cos(z * scale) * np.cos(x * scale)-c
-        
+    return cached_file   
     def generate_solid_volume(size, resolution, scale, c):
         """Generate a mesh for the solid volume on one side of the gyroid surface within a cube."""
         x = np.linspace(-size / 2, size / 2, num=resolution)
