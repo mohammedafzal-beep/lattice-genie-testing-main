@@ -2,6 +2,8 @@ import numpy as np
 from stl import mesh
 from skimage import measure
 import os
+from TPMS.All_kind_TPMS_Gen import generate_iso_mesh, snap_to_cube_planes, decimate_and_clean, build_end_caps
+
 def Skeletal_Primitive(C,a1,a2, resolution = 200, folder='all_files'):
     V, F = generate_iso_mesh(size, resolution, scale, C, kind='p', mode='skeletal')
     V = snap_to_cube_planes(V, SNAP_TOL)

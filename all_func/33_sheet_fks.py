@@ -2,6 +2,8 @@ import numpy as np
 from skimage import measure
 from stl import mesh
 import os
+from TPMS.All_kind_TPMS_Gen import generate_iso_mesh, snap_to_cube_planes, decimate_and_clean, build_end_caps
+
 MAX_TRIS_FOR_STEP = 50000
 SNAP_TOL = 1e-6
 
