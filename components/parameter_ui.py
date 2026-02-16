@@ -37,7 +37,7 @@ def show_parameter_sliders(data,mode):
         else:
             confirmed = st.session_state['confirmed_params']
             dict_key = int(confirmed.get('dict_key', -1))
-        
+            st.session_state['dict_key'] = dict_key
         struc_name = data['dict_key_map'].get(dict_key, 'Unknown Structure')
         with st.session_state['struc_name']:
                 
@@ -198,9 +198,13 @@ unsafe_allow_html=True
             st.session_state['stl_display'] = True
         
     if mode == 'Chat mode' and st.session_state['stl_display']:
-        
+        SCALING_FACTOR = 100
+        if st.session_state['dict_key'] == 4:
+                SCALING_FACTOR = 2.4
+        elif st.session_state['dict_key'] == 29:
+                SCALING_FACTOR = 1.58
         stl_from_file(st.session_state['stl_path'],st.session_state.get('stl_color', '#336fff'), 
-                        auto_rotate=True, height=500,cam_distance=100*(current_params['resolution']/50),
+                        auto_rotate=True, height=500,cam_distance=SCALING_FACTOR*(current_params['resolution']/50),
                         cam_h_angle=45,cam_v_angle=75)
                 
         with st.session_state['Scroll message']:
