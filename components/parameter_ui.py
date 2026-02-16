@@ -91,6 +91,7 @@ def show_parameter_sliders(data,mode):
         
         st.session_state['current_params'] = current_params
         log_slider_changes(current_params, mode)
+        
         with st.session_state['spinner']:
             st.markdown(
 """

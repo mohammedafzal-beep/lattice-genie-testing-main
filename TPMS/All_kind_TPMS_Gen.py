@@ -179,6 +179,7 @@ def _boundary_loops_on_plane(V, F, ax, val, tol, kind, direction='normal',mode="
     """Return ordered vertex loops for open edges that lie on plane x/y/z=val."""
     # 1. 筛选点
     # 找出一个布尔掩码，标记哪些顶点在这个平面上（考虑误差 tol）
+    SNAP_TOL =1e-6
     vmask = _on_plane_mask(V, ax, val, tol=SNAP_TOL)
 
     # count all edges → boundary = edges used by exactly 1 triangle
@@ -750,7 +751,7 @@ def _boundary_loops_on_plane(V, F, ax, val, tol, kind, direction='normal',mode="
 
     # ========================================================
 
-    elif kind in ["Primitive", "primitive", "FRD", "frd", "Fischer-Koch Random Dots",
+    elif kind in ["Primitive", "p","primitive", "FRD", "frd", "Fischer-Koch Random Dots",
                   "IWP", "iwp", "Isotropic Woodpile", "Neovius", "neovius", "N", "n"]:
         loops_final = {}
         # 遍历所有找到的线段 (loops)
@@ -1046,10 +1047,11 @@ def _boundary_loops_on_plane(V, F, ax, val, tol, kind, direction='normal',mode="
                 loops_final[m] += [end]
                 # print (loops_final)
                 m += 1
+                return loops_final, V
 
 
-    if len(loops_final[list(loops_final.keys())[-1]]) == 0:
-        del loops_final[list(loops_final.keys())[-1]]
+        #if len(loops_final[list(loops_final.keys())[-1]]) == 0:
+            #del loops_final[list(loops_final.keys())[-1]]
     return loops_final, V
 
 
@@ -1223,7 +1225,6 @@ def build_end_caps(V, F, tol, kind, direction='normal',mode="sheet"):
 
 def create_stl_from_mesh(verts, faces, folder, filename, caps=None):
     """Create an STL file from vertices and faces."""
-
     if not os.path.exists(folder):
         os.makedirs(folder)
 

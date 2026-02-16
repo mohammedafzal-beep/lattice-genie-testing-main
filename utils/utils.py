@@ -118,14 +118,7 @@ def surface_area_to_volume_ratio(stl_file_path):
 # --- Slider UI component that supports both static and C-dependent dynamic ranges ---
 def labeled_slider(param_key, cfg, current_params):
   # Define all supported dynamic range functions
-  def t_range_func_C29(C): return (0.1, 1.0 + C, 0.1)
-  def t_range_func_C30(C): return (0.1, 1.4 + C, 0.1)
-  def t_range_func_C31(C): return (0.1, 1.0 + C, 0.1)
-  def t_range_func_C32(C): return (0.2, 3.0 + C, 0.1)
-  def t_range_func_C33(C): return (0.1, 0.8 + C, 0.1)
-  def t_range_func_C34(C): return (0.1, 1.1 + C, 0.1)
-  def t_range_func_C35(C): return (0.1, 0.7 + C, 0.1)
-
+  
   def body_atom_radius_range(r):
     radius_range_map = {0.33: (0.545, 0.595, 0.01), 0.34: (0.535, 0.585, 0.01), 0.35: (0.525, 0.585, 0.01), 0.36: (0.515, 0.575, 0.01), 0.37: (0.505, 0.575, 0.01), 0.38: (0.495, 0.565, 0.01), 0.39: (0.485, 0.565, 0.01), 0.4: (0.475, 0.555, 0.01), 0.41: (0.465, 0.555, 0.01), 0.42: (0.455, 0.545, 0.01), 
 0.43: (0.445, 0.545, 0.01), 0.44: (0.445, 0.545, 0.01), 0.45: (0.455, 0.535, 0.01), 0.46: (0.465, 0.535, 0.01), 0.47: (0.475, 0.525, 0.01), 
@@ -139,13 +132,6 @@ def labeled_slider(param_key, cfg, current_params):
     return radius_range_map[r]
 
   RANGE_FUNC_MAP = {
-      "t_range_func_C29": t_range_func_C29,
-      "t_range_func_C30": t_range_func_C30,
-      "t_range_func_C31": t_range_func_C31,
-      "t_range_func_C32": t_range_func_C32,
-      "t_range_func_C33": t_range_func_C33,
-      "t_range_func_C34": t_range_func_C34,
-      "t_range_func_C35": t_range_func_C35,
       "body_atom_radius_range": body_atom_radius_range,
       "face_atom_radius_range": face_atom_radius_range,
   }
@@ -227,8 +213,8 @@ def labeled_slider(param_key, cfg, current_params):
   
   default_val = cfg.get("default")
   prev_val = st.session_state.get(param_key, current_params.get(param_key, default_val))
-  #clamped_val = max(cfg.get("min"), min(prev_val, cfg.get("max")))
-  st.session_state[param_key] = default_val  # store current value
+  clamped_val = max(cfg.get("min"), min(prev_val, cfg.get("max")))
+  st.session_state[param_key] = clamped_val  # store current value
   st.markdown("""
 <style>
 /* Slider label spacing */
