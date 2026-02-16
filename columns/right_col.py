@@ -4,13 +4,17 @@ from utils.dataloader import log_event, log_submission
 from components.parameter_ui import labeled_slider
 def right_column(data):
     st.markdown('<h3 style="display: flex; align-items: center; justify-content: center; margin-top: -20px; text-align:center;">📸 Preview </h3>', unsafe_allow_html=True)
-    
+    SCALING_FACTOR = 94
     if st.session_state['stl_path']:
-        
+        if st.session_state['dict_key'] in [4,29]:
+            if st.session_state['dict_key'] == 4:
+                SCALING_FACTOR = 2.4
+            elif st.session_state['dict_key'] == 29:
+                SCALING_FACTOR = 1.58
         current_params = st.session_state['current_params']
         stl_from_file(st.session_state['stl_path'],st.session_state.get('stl_color', '#336fff'), 
                 auto_rotate=True, height=250,
-                cam_distance=94*(current_params['resolution']/50),cam_h_angle=45,cam_v_angle=75)
+                cam_distance=SCALING_FACTOR*(current_params['resolution']/50),cam_h_angle=45,cam_v_angle=75)
         
             
         # Download button

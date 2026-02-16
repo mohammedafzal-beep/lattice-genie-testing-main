@@ -8,3 +8,6 @@ numpy
 pydrive2
 pyvista
 vtk
+shapely
+open3d
+mcubes
