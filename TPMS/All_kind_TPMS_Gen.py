@@ -1191,11 +1191,15 @@ def build_end_caps(V, F, tol, kind, direction='normal',mode="sheet"):
             # print(ax,val,loop_id,loops[loop_id])
 
             # 2. Delete the irrelevant axis
-            modified_points = np.delete(np.array(points), obj=ax, axis=1)
-            modified_points_list = modified_points.tolist()
+            if np.ndim(np.array(points)) > 1:
+                points = np.delete(np.array(points), obj=ax, axis=1)
+                modified_points_list = points.tolist()
+            else:
+                points = np.delete(np.array(points),obj=ax)
+                modified_points_list = points.tolist()
             # print (modified_points_list)
             # 3. Perform Delaunay triangulation
-            poly = Polygon(modified_points)
+            poly = Polygon(points)
             # print("Polygon valid?", poly.is_valid)
             # if not poly.is_valid:
             #     print(explain_validity(poly))
@@ -1212,7 +1216,7 @@ def build_end_caps(V, F, tol, kind, direction='normal',mode="sheet"):
                     # print (int(triangles[m][n]))
                     vert[n] = points[int(triangles[m][n])]
                 normal2 = calculate_triangle_normal(vert[0], vert[1], vert[2])
-                if np.dot(normal1, np.array(normal2)) < 0:
+                if float(np.dot(normal1, np.array(normal2)).sum()) < 0:
                     triangles[m][0], triangles[m][1] = triangles[m][1], triangles[m][0]
                 F1 = np.concatenate(
                     (F1, np.array([[loops[loop_id][int(triangles[m][0])], loops[loop_id][int(triangles[m][1])],

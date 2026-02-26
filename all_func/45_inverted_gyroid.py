@@ -11,10 +11,9 @@ def Inverted_Gyroid(C, a1,a2, resolution = 200, folder='all_files'):
     
     
     V, F = generate_iso_mesh(1, resolution, scale, C, kind='g', mode='skeletal')
-    V = snap_to_cube_planes(V, SNAP_TOL)
     V, F = decimate_and_clean(V, F, MAX_TRIS_FOR_STEP)
     V, F = build_end_caps(V, F, tol=SNAP_TOL, kind='g', direction='reverse',mode='skeletal')
     rotate(V,a1,a2,0) 
-    filename = f"44Inverted_Gyroid_{C:.2f}_{direction}_{a1}_{a2}.stl"  # Format filename with the c value
+    filename = f"44Inverted_Gyroid_{C:.2f}_{a1}_{a2}.stl"  # Format filename with the c value
     cached_file = create_stl_from_mesh(V,F,folder,filename)
-    return cached_file 
+    return f"{folder}/{filename}"  

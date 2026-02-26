@@ -13,7 +13,7 @@ def Sheet_Gyroid(C, direction, a1,a2, resolution = 200, folder='all_files'):
     
     
     V, F = generate_iso_mesh(1, resolution, scale, C, kind='g', mode='sheet')
-    V = snap_to_cube_planes(V, SNAP_TOL)
+
     V, F = decimate_and_clean(V, F, MAX_TRIS_FOR_STEP)
     V, F = build_end_caps(V, F, tol=SNAP_TOL, kind='p', direction=direction,mode='sheet')
     rotate(V,a1,a2,0) 
