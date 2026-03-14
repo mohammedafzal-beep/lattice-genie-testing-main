@@ -5,7 +5,8 @@ from components.parameter_ui import show_parameter_sliders
 from columns.left_col import left_column
 from columns.right_col import right_column
 from utils.dataloader import log_slider_changes
-
+from streamlit_stl import stl_from_file
+import time
 def render_home(data):
     st.markdown("""
     <div class='center'>
@@ -34,9 +35,37 @@ def render_home(data):
    
     with st.container():
       handle_user_input(data)
+      show_parameter_sliders(data,'Chat')
+      display_stl()
 
-      if st.session_state.get("confirmed_params"):
-        show_parameter_sliders(data,'Chat mode')
+def display_stl():
+  if st.session_state.get('stl_generated'):
+    SCALING_FACTOR = 100
+    if st.session_state['dict_key'] == 4:
+            SCALING_FACTOR = 2.4
+    elif st.session_state['dict_key'] == 29:
+            SCALING_FACTOR = 1.58
+    current_params = st.session_state['current_params']    
+    stl_from_file(st.session_state['stl_path'],st.session_state.get('stl_color', '#336fff'), 
+                    auto_rotate=True, height=500,cam_distance=SCALING_FACTOR*(current_params['resolution']/50),
+                    cam_h_angle=45,cam_v_angle=75)
+                
+    with st.session_state['Scroll message']:
+            st.markdown("<p style='font-size:17px'>✅ STL Generated! Scroll down to view <br> \
+            ⬇️ Download using button below </p> ", unsafe_allow_html= True)
+    
+    time.sleep(4)
+    st.session_state['Scroll message'].empty()
+    
+    download_submit_tab = st.columns([1.7, 1, 1])
+    
+            
+    with open(st.session_state['stl_path'], 'rb') as f:
+        
+        with download_submit_tab[1]:
+            st.download_button('⬇️ Download STL', data=f.read(), file_name=st.session_state['stl_path'], mime='model/stl')
+            
+            log_event("Download", 'Chat mode')
 
 def render_home_dropdown_version(data):
     

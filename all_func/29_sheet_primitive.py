@@ -1,90 +1,66 @@
 import numpy as np
-import stl, pathlib
 from stl import mesh
 from skimage import measure
 import os
 from pathlib import Path
-from TPMS.All_kind_TPMS_Gen import (generate_iso_mesh, snap_to_cube_planes, rotate, 
-decimate_and_clean, build_end_caps, create_stl_from_mesh, rotate)
-import math
-MAX_TRIS_FOR_STEP = 50000
-SNAP_TOL = 1e-6
-scale = 2 * math.pi
-def Sheet_Primitive(C, direction, a1,a2, resolution = 200, folder='all_files'):
+def Sheet_Primitive(C, t,  resolution = 200 , folder='all_files'):
+    def Primitive_function(x, y, z, scale=1, c=1.0):
+        return np.cos(z * scale) + np.cos(y * scale) + np.cos(x * scale)-c
+
+    def generate_solid_volume(size, resolution, scale, c, t):
+    # Create a 3D grid
+        x = np.linspace(-size / 2, size / 2, num=resolution)
+        y = np.linspace(-size / 2, size / 2, num=resolution)
+        z = np.linspace(-size / 2, size / 2, num=resolution)
+        x, y, z = np.meshgrid(x, y, z)
+
+        # Evaluate the Gyroid function
+        values = Primitive_function(x, y, z, scale, c)
+        values1 = -Primitive_function(x, y, z, scale, c-t)
+        # # Modify values outside the cube to ensure one space is solid
+        values[np.cos(z * scale) + np.cos(y * scale) + np.cos(x * scale)<=c-t] =\
+            values1[np.cos(z * scale) + np.cos(y * scale) + np.cos(x * scale)<=c-t]
+        values[(np.cos(z * scale) + np.cos(y * scale) + np.cos(x * scale)>c-t) &
+            (np.cos(z * scale) + np.cos(y * scale) + np.cos(x * scale)<=c-t/2)] \
+            = values1[(np.cos(z * scale) + np.cos(y * scale) + np.cos(x * scale)>c-t) &
+            (np.cos(z * scale) + np.cos(y * scale) + np.cos(x * scale)<=c-t/2)] 
+
+        values[x==-size / 2] = np.max(np.abs(values))
+        values[x==size / 2] = np.max(np.abs(values))
+        values[y==-size / 2] = np.max(np.abs(values))
+        values[y==size / 2] = np.max(np.abs(values))
+        values[z==-size / 2] = np.max(np.abs(values))
+        values[z==size / 2] = np.max(np.abs(values))
+            
+            # Extract the isosurface that represents the solid volume
+        verts, faces, _, _ = measure.marching_cubes(values, level=0)
+
+        return verts, faces
+
+    def create_stl_from_mesh(verts, faces, folder, filename="Sheet_Primitive.stl"):
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+            # Full path for the file
+        full_path = os.path.join(folder, filename)
+            # Create the mesh
+        solid_volume_mesh = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
+        for i, f in enumerate(faces):
+            for j in range(3):
+                solid_volume_mesh.vectors[i][j] = verts[f[j], :]
+        # Write the mesh to an STL file
+        solid_volume_mesh.save(full_path)
+        print(f"STL file saved as {full_path}")
+
+        
+
+    size = 10.0  # Spatial size
+   # Grid resolution
+    scale = 2 * np.pi / size  # Scale of the gyroid pattern
     
-    
-    V, F = generate_iso_mesh(1, resolution, scale, C, kind='p', mode='sheet')
-
-    V, F = build_end_caps(V, F, tol=SNAP_TOL, kind='p', direction=direction,mode='sheet')
-    rotate(V,a1,a2,0) 
-    filename = f"29Sheet_Primitive_{C:.2f}_{direction}_{a1}_{a2}.stl"  # Format filename with the c value
-    cached_file = create_stl_from_mesh(V,F,folder,filename)
-    return f"{folder}/{filename}"  
-import numpy as np
-
-def remove_duplicate_vertices(V, F, tol=1e-6):
-    """
-    Robust, order-preserving deduplication with tolerance.
-    Works even if V is accidentally (N,1,3) from np.append usage.
-
-    Returns:
-        V2: (N2,3) float64
-        F2: (M2,3) int32
-    """
-    V = np.asarray(V)
-    F = np.asarray(F)
-
-    # ---- Normalize V to strict (N,3) float64 ----
-    if V.ndim == 3 and V.shape[1] == 1 and V.shape[2] == 3:
-        V = V[:, 0, :]
-    elif V.ndim != 2 or V.shape[-1] != 3:
-        V = V.reshape(-1, 3)
-
-    V = np.asarray(V, dtype=np.float64)
-
-    # ---- Normalize F to strict (M,3) int64 ----
-    if F.ndim != 2 or F.shape[1] != 3:
-        F = F.reshape(-1, 3)
-    F = np.asarray(F, dtype=np.int64)
-
-    if tol <= 0:
-        raise ValueError("tol must be > 0")
-
-    # ---- Bounds check (fail fast instead of corrupting) ----
-    if len(V) == 0:
-        return V, F.astype(np.int32)
-    if F.size and (F.min() < 0 or F.max() >= len(V)):
-        raise ValueError(f"Face index out of bounds: F in [{F.min()},{F.max()}], V has {len(V)} verts")
-
-    # ---- Quantize for tolerance-based merging ----
-    Q = np.round(V / tol).astype(np.int64)
-
-    # ---- Stable mapping (first-seen order preserved) ----
-    key_to_new = {}
-    inverse = np.empty(len(V), dtype=np.int64)
-    new_verts = []
-
-    for i, key in enumerate(map(tuple, Q)):
-        j = key_to_new.get(key)
-        if j is None:
-            j = len(new_verts)
-            key_to_new[key] = j
-            new_verts.append(V[i])   # keep first occurrence
-        inverse[i] = j
-
-    V2 = np.asarray(new_verts, dtype=np.float64)
-
-    # ---- Remap faces ----
-    F2 = inverse[F]
-
-    # ---- Drop degenerate triangles (repeated vertex indices) ----
-    nondeg = (F2[:, 0] != F2[:, 1]) & (F2[:, 1] != F2[:, 2]) & (F2[:, 0] != F2[:, 2])
-    F2 = F2[nondeg]
-
-    # ---- Drop duplicate triangles (ignoring winding) ----
-    Fs = np.sort(F2, axis=1)
-    _, keep = np.unique(Fs, axis=0, return_index=True)
-    F2 = F2[np.sort(keep)].astype(np.int32)
-
-    return V2, F2
-
+    #t_values = np.linspace(0.05, 2.7, 10)  # For example, iterating over t from 0.1 to 1.0 in 10 steps
+    filename = f"29Sheet_Primitive_{C:.1f}_{t:.1f}_{resolution}.stl"
+    cached_file = os.path.join(folder, filename) 
+ 
+    verts, faces = generate_solid_volume(size, resolution, scale, C, t)
+    create_stl_from_mesh(verts, faces, folder, filename) 
+    return cached_file

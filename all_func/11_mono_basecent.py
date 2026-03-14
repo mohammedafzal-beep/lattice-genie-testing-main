@@ -81,9 +81,13 @@ def Mono_BaseCent(a,b,c,r,alpha,beta,gamma,face_atom_radius=0.37,resolution = 20
             plane_val = normal_vector[0]*x + normal_vector[1]*y + normal_vector[2]*z + D
             mask = np.isclose(plane_val, 0, atol=1e-3)
             values[mask] = 1  # Set to positive value (outside)
-
-        verts, faces, _, _ = measure.marching_cubes(values, level=0)
-        verts = np.dot(verts, T)
+        try:
+            verts, faces, _, _ = measure.marching_cubes(values, level=0)
+            verts = np.dot(verts, T)
+        except ValueError:
+            a = 0
+            b = 0
+            return a, b
         return verts, faces
 
 
@@ -126,5 +130,7 @@ def Mono_BaseCent(a,b,c,r,alpha,beta,gamma,face_atom_radius=0.37,resolution = 20
     cached_file = os.path.join(folder, filename) 
 
     verts, faces = generate_solid_volume(resolution, atom_positions, T, r, face_atom_radius, a, b, c, plane_equation)
+    if verts == 0 and faces == 0:
+        return 0
     create_stl_from_mesh(verts, faces, folder, filename) 
     return cached_file

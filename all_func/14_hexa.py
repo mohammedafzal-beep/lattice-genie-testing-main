@@ -56,9 +56,15 @@ def Hexa(a, b, c,alpha,beta,gamma, r=0.75, resolution=200, folder='all_files'):
         values[:, :, 0] = 1
         values[:, :, -1] = 1
 
-        verts_idx, faces, _, _ = measure.marching_cubes(values, level=0)
-        transform_matrix = np.stack([v1, v2, v3], axis=1)
-        verts = verts_idx @ (transform_matrix / (resolution - 1))
+        try:
+            verts_idx, faces, _, _ = measure.marching_cubes(values, level=0)
+            transform_matrix = np.stack([v1, v2, v3], axis=1)
+            verts = verts_idx @ (transform_matrix / (resolution - 1))
+        except RuntimeError:
+            a = 0
+            b = 0
+            return a, b
+        
         return verts, faces
 
     def create_stl_from_mesh(verts, faces, folder, filename):
@@ -78,5 +84,7 @@ def Hexa(a, b, c,alpha,beta,gamma, r=0.75, resolution=200, folder='all_files'):
     cached_file = os.path.join(folder, filename) 
 
     verts, faces = generate_solid_volume()
+    if verts == 0 and faces == 0:
+        return 0
     create_stl_from_mesh(verts, faces, folder, filename) 
     return cached_file

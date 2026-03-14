@@ -12,7 +12,7 @@ def vol_ratio(file_path):
     points = m.vectors.reshape(-1, 3)
     bbox_volume = np.prod(points.max(axis=0) - points.min(axis=0))
 
-    ratio = solid_volume / bbox_volume
+    ratio = abs(solid_volume / bbox_volume)
     return f"{ratio:.2f}"
 
 def visualize_overhang(mesh: pv.PolyData, threshold_angle: float = 45.0):
@@ -72,7 +72,7 @@ def surface_area_to_volume_ratio(file_path):
     Calculate overhanging and surface ratio.
     Output surface ratio value
     """
-    return 0.16
+
     # calculate overhanging
     mesh = pv.read(file_path)
     ratio, labeled_mesh = visualize_overhang(mesh, threshold_angle=45.0)

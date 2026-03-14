@@ -65,8 +65,13 @@ def Inverse_Mono(a, b, c, r, alpha, beta, gamma, resolution = 200 , folder='all_
             plane_val = np.round(normal[0]*x + normal[1]*y + normal[2]*z + D, 3)
             values[plane_val == 0] = -1
 
-        verts, faces, _, _ = measure.marching_cubes(values, level=0)
-        verts = np.dot(verts, T)
+        try:
+            verts, faces, _, _ = measure.marching_cubes(values, level=0)
+            verts = np.dot(verts, T)
+        except RuntimeError:
+            a = 0
+            b = 0
+            return a, b
         return verts, faces
 
     def create_stl_from_mesh(verts, faces, folder, filename): 
@@ -106,5 +111,7 @@ def Inverse_Mono(a, b, c, r, alpha, beta, gamma, resolution = 200 , folder='all_
     cached_file = os.path.join(folder, filename) 
 
     verts, faces = generate_solid_volume(resolution, atom_positions, T, r, a, b, c, plane_equation)
+    if verts == 0 and faces == 0:
+        return 0
     create_stl_from_mesh(verts, faces, folder, filename) 
     return cached_file

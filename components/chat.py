@@ -15,7 +15,7 @@ from utils.dataloader import log_message
 
 # Initialize the OpenAI client with a fixed API key.
 client = OpenAI(
-    api_key="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"
+    api_key="***"
 )
 
 
@@ -240,7 +240,7 @@ def handle_user_input(data):
                 assistant_reply,
                 data,
             )
-
+            
             # Replace the typing placeholder with the real assistant reply (plain text).
             st.session_state["messages"][-1] = {
                 "id": str(uuid.uuid4()),
@@ -253,9 +253,9 @@ def handle_user_input(data):
             # Clear pending and processing flags.
             st.session_state["pending_llm"] = None
             st.session_state["processing_input"] = False
-
-            # Rerun to render the assistant reply (the typing HTML is gone now).
             st.rerun()
+            # Rerun to render the assistant reply (the typing HTML is gone now).
+            
 
 
 def process_assistant_response(assistant_msg, data):
@@ -281,11 +281,8 @@ def process_assistant_response(assistant_msg, data):
             parsed = json.loads(assistant_msg[start : end + 1])
             dict_key = parsed.get("dict_key")
             if dict_key is not None:
-                schema = params_dict.get(int(dict_key), {})
-                base = {"dict_key": dict_key}
-                for k, cfg in schema.items():
-                    base[k] = cfg["default"]
-                st.session_state["confirmed_params"] = base
+
+                st.session_state['dict_key'] = dict_key
                 confirmed = True
         except json.JSONDecodeError:
             pass

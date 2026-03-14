@@ -255,7 +255,7 @@
             [
                 "Schwarz Diamond",
                 [
-                    "./def/31Sheet_D_0.0_200.stl",
+                    "./def/31Sheet_D_0.0_0.1_200.stl",
                     "./img/31sheet_schwarz_dia.jpg"
                 ],
                 "Features a diamond-like sheet structure that combines high mechanical          strength and resilience, suitable for robust structural applications where high stiffness and energy dissipation          are required."
@@ -263,7 +263,7 @@
             [
                 "Scheon I-WP",
                 [
-                    "./def/32Sheet_IWP_0.0_200.stl",
+                    "./def/32Sheet_IWP_0.0_0.2_200.stl",
                     "./img/32Sheet_IWP.jpg"
                 ],
                 "Characterized by its complex, interwoven sheet structure, providing unique deformation          characteristics and energy absorption properties, ideal for impact-resistant and vibration-damping applications."
@@ -271,7 +271,7 @@
             [
                 "Fischer Koch Surface",
                 [
-                    "./def/33Sheet_FKS_0.0_200.stl",
+                    "./def/33Sheet_FKS_0.0_0.1_200.stl",
                     "./img/33sheet_fks.jpg"
                 ],
                 "Exhibits a skeletal sheet structure with high porosity and surface area,          offering excellent properties for lightweight applications and efficient fluid flow, making it suitable for filtration          and heat exchange systems"
@@ -279,7 +279,7 @@
             [
                 "Schoen F-RD",
                 [
-                    "./def/34Sheet_FRD_0.0_200.stl",
+                    "./def/34Sheet_FRD_0.0_0.25_200.stl",
                     "./img/34Sheet_Scheon_FRD.jpg"
                 ],
                 "Known for its highly connected, complex sheet topology, offering a combination of          mechanical robustness and flexibility, making it suitable for advanced engineering applications requiring dynamic          mechanical performance. "
@@ -287,7 +287,7 @@
             [
                 "Sheet Neovius",
                 [
-                    "./def/35Sheet_N_0.0_200.stl",
+                    "./def/35Sheet_N_0.0_0.15_200.stl",
                     "./img/35sheet_neovius.jpg"
                 ],
                 "Features a robust, high-surface-area sheet structure, providing exceptional mechanical          stability and potential for multifunctional applications, including biomaterial scaffolds and advanced porous materials."

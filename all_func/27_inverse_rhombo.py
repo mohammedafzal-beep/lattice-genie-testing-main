@@ -68,8 +68,13 @@ def Inverse_Rhombo(a, b, c, r, alpha, beta, gamma,    resolution = 200, folder='
         for normal_vector, D in plane_equation.values():
             values[np.isclose(normal_vector[0]*x + normal_vector[1]*y + normal_vector[2]*z + D, 0, atol=1e-3)] = -1
 
-        verts, faces, _, _ = measure.marching_cubes(values, level=0)
-        verts = np.dot(verts, T)
+        try:
+            verts, faces, _, _ = measure.marching_cubes(values, level=0)
+            verts = np.dot(verts, T)
+        except RuntimeError:
+            a = 0
+            b = 0
+            return a, b
         return verts, faces
 
 
@@ -115,5 +120,7 @@ def Inverse_Rhombo(a, b, c, r, alpha, beta, gamma,    resolution = 200, folder='
     cached_file = os.path.join(folder, filename) 
 
     verts, faces = generate_solid_volume(resolution, atom_positions, T, r, a, b, c, plane_equation)
+    if verts == 0 and faces == 0:
+        return 0
     create_stl_from_mesh(verts, faces, folder, filename) 
     return cached_file

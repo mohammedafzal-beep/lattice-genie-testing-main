@@ -118,7 +118,7 @@ def surface_area_to_volume_ratio(stl_file_path):
 # --- Slider UI component that supports both static and C-dependent dynamic ranges ---
 def labeled_slider(param_key, cfg, current_params):
   # Define all supported dynamic range functions
-  
+ 
   def body_atom_radius_range(r):
     radius_range_map = {0.33: (0.545, 0.595, 0.01), 0.34: (0.535, 0.585, 0.01), 0.35: (0.525, 0.585, 0.01), 0.36: (0.515, 0.575, 0.01), 0.37: (0.505, 0.575, 0.01), 0.38: (0.495, 0.565, 0.01), 0.39: (0.485, 0.565, 0.01), 0.4: (0.475, 0.555, 0.01), 0.41: (0.465, 0.555, 0.01), 0.42: (0.455, 0.545, 0.01), 
 0.43: (0.445, 0.545, 0.01), 0.44: (0.445, 0.545, 0.01), 0.45: (0.455, 0.535, 0.01), 0.46: (0.465, 0.535, 0.01), 0.47: (0.475, 0.525, 0.01), 
@@ -130,10 +130,22 @@ def labeled_slider(param_key, cfg, current_params):
 0.45: (0.265, 0.355, 0.01), 0.46: (0.255, 0.345, 0.01), 0.47: (0.245, 0.325, 0.01), 0.48: (0.235, 0.315, 0.01), 0.49: (0.225, 0.295, 0.01), 
 0.5: (0.215, 0.285, 0.01), 0.51: (0.205, 0.275, 0.01), 0.52: (0.205, 0.255, 0.01), 0.53: (0.205, 0.245, 0.01), 0.54: (0.205, 0.225, 0.01), 0.55: (0.205, 0.215, 0.01), 0.56: (0.205, 0.205, 0.01)}
     return radius_range_map[r]
-
+  def t_range_func_C29(C): return (0.1, 1.0 + C, 0.1)
+  def t_range_func_C30(C): return (0.1, 1.4 + C, 0.1)
+  def t_range_func_C31(C): return (0.1, 1.0 + C, 0.1)
+  def t_range_func_C32(C): return (0.2, 3.0 + C, 0.1)
+  def t_range_func_C33(C): return (0.1, 0.8 + C, 0.1)
+  def t_range_func_C34(C): return (0.1, 1.1 + C, 0.1)
+  def t_range_func_C35(C): return (0.1, 0.7 + C, 0.1)
   RANGE_FUNC_MAP = {
       "body_atom_radius_range": body_atom_radius_range,
-      "face_atom_radius_range": face_atom_radius_range,
+      "face_atom_radius_range": face_atom_radius_range,"t_range_func_C29": t_range_func_C29,
+      "t_range_func_C30": t_range_func_C30,
+      "t_range_func_C31": t_range_func_C31,
+      "t_range_func_C32": t_range_func_C32,
+      "t_range_func_C33": t_range_func_C33,
+      "t_range_func_C34": t_range_func_C34,
+      "t_range_func_C35": t_range_func_C35,
   }
 
   # Units for each param
@@ -201,19 +213,16 @@ def labeled_slider(param_key, cfg, current_params):
       else:
             r = current_params.get('r')
             min_val, max_val, step = range_func(r)
-      
   else:
       # Static range
       min_val = cfg.get("min")
       max_val = cfg.get("max")
       step = cfg.get("step", 0.01)
- 
-  if param_key == 'direction':
-    return st.sidebar.selectbox("Direction", ('normal','reverse'))
-  
-  default_val = cfg.get("default")
+      
+  default_val = cfg.get("default", min_val)
   prev_val = st.session_state.get(param_key, current_params.get(param_key, default_val))
-  clamped_val = max(cfg.get("min"), min(prev_val, cfg.get("max")))
+
+  clamped_val = max(min_val, min(prev_val, max_val))
   st.session_state[param_key] = clamped_val  # store current value
   st.markdown("""
 <style>
@@ -267,7 +276,7 @@ def generate_stl(dict_key, params):
         13: "Rhombo", 14: "Hexa", 15: "Inverse", 16: "Inverse_FCC",
         17: "Inverse_BCC", 18: "Inverse_Cubic_Ortho", 19: "Inverse_Ortho_BaseCent", 20: "Inverse_Ortho_FCC",
         21: "Inverse_Ortho_BCC", 22: "Inverse_Tetra", 23: "Inverse_Tetra_BCC", 24: "Inverse_Mono",
-        25: "Inverse_Mono_BaseCent", 26: "Inverse_Rhombo", 27: "Inverse_Triclinic", 28: "Inverse_Hexa",
+        25: "Inverse_Mono_BaseCent", 26: "Inverse_Triclinic", 27: "Inverse_Rhombo", 28: "Inverse_Hexa",
         29: "Sheet_Primitive", 30: "Sheet_Gyroid", 31: "Sheet_Diamond", 32: "Sheet_IWP",
         33: "Sheet_FKS", 34: "Sheet_FRD", 35: "Sheet_Neovius", 36: "Skeletal_Primitive",
         37: "Skeletal_Gyroid", 38: "Skeletal_Diamond", 39: "Skeletal_IWP", 40: "Skeletal_FKS",

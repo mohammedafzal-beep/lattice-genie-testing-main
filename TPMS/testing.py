@@ -1,4 +1,8 @@
 import numpy as np
+from stl import mesh
+from skimage import measure
+import os
+import numpy as np
 from matplotlib import pyplot as plt
 
 from stl import mesh
@@ -80,20 +84,11 @@ def tpms_value(x, y, z, k, kind, iso, mode):
             z * k)
     else:
         raise ValueError("Unknown TPMS kind")
-
-    if mode == 'sheet':
-        # Sheet Logic:
-        # We want the region where |F| < iso.
-        # Marching cubes finds level=0.
-        # We define Value = iso - |F|.
-        # If Value > 0, then |F| < iso (Solid).
-        return F
-    else:
         # Skeletal Logic (Original):
-        return F - iso
+    return F - iso
 
 
-def generate_iso_mesh(size, resolution, scale, c, kind, mode):
+def generate_iso_mesh(size, resolution, scale, c, kind, mode,thickness):
     """Generate a mesh for the solid volume on one side of the gyroid surface within a cube."""
     x = np.linspace(0, 1, num=resolution)
     y = np.linspace(0, 1, num=resolution)
@@ -104,8 +99,8 @@ def generate_iso_mesh(size, resolution, scale, c, kind, mode):
 
     if mode == 'sheet':
         # values = np.pad(values, pad_width=1, mode='constant', constant_values=-1.0)
-        values_1=c-values
-        values_2=c+values
+        values_1=values-thickness
+        values_2=values+thickness
         verts1, faces1, _, _ = measure.marching_cubes(values_1, level=0)
         verts2, faces2, _, _ = measure.marching_cubes(values_2, level=0)
         verts = np.vstack((verts1, verts2))
@@ -179,7 +174,6 @@ def _boundary_loops_on_plane(V, F, ax, val, tol, kind, direction='normal',mode="
     """Return ordered vertex loops for open edges that lie on plane x/y/z=val."""
     # 1. 筛选点
     # 找出一个布尔掩码，标记哪些顶点在这个平面上（考虑误差 tol）
-    SNAP_TOL =1e-6
     vmask = _on_plane_mask(V, ax, val, tol=SNAP_TOL)
 
     # count all edges → boundary = edges used by exactly 1 triangle
@@ -751,7 +745,7 @@ def _boundary_loops_on_plane(V, F, ax, val, tol, kind, direction='normal',mode="
 
     # ========================================================
 
-    elif kind in ["Primitive", "p","primitive", "FRD", "frd", "Fischer-Koch Random Dots",
+    elif kind in ["Primitive", "primitive", "FRD", "frd", "Fischer-Koch Random Dots",
                   "IWP", "iwp", "Isotropic Woodpile", "Neovius", "neovius", "N", "n"]:
         loops_final = {}
         # 遍历所有找到的线段 (loops)
@@ -1047,11 +1041,10 @@ def _boundary_loops_on_plane(V, F, ax, val, tol, kind, direction='normal',mode="
                 loops_final[m] += [end]
                 # print (loops_final)
                 m += 1
-                return loops_final, V
 
 
-        #if len(loops_final[list(loops_final.keys())[-1]]) == 0:
-            #del loops_final[list(loops_final.keys())[-1]]
+    if len(loops_final[list(loops_final.keys())[-1]]) == 0:
+        del loops_final[list(loops_final.keys())[-1]]
     return loops_final, V
 
 
@@ -1191,15 +1184,11 @@ def build_end_caps(V, F, tol, kind, direction='normal',mode="sheet"):
             # print(ax,val,loop_id,loops[loop_id])
 
             # 2. Delete the irrelevant axis
-            if np.ndim(np.array(points)) > 1:
-                points = np.delete(np.array(points), obj=ax, axis=1)
-                modified_points_list = points.tolist()
-            else:
-                points = np.delete(np.array(points),obj=ax)
-                modified_points_list = points.tolist()
+            modified_points = np.delete(np.array(points), obj=ax, axis=1)
+            modified_points_list = modified_points.tolist()
             # print (modified_points_list)
             # 3. Perform Delaunay triangulation
-            poly = Polygon(points)
+            poly = Polygon(modified_points)
             # print("Polygon valid?", poly.is_valid)
             # if not poly.is_valid:
             #     print(explain_validity(poly))
@@ -1216,7 +1205,7 @@ def build_end_caps(V, F, tol, kind, direction='normal',mode="sheet"):
                     # print (int(triangles[m][n]))
                     vert[n] = points[int(triangles[m][n])]
                 normal2 = calculate_triangle_normal(vert[0], vert[1], vert[2])
-                if float(np.dot(normal1, np.array(normal2)).sum()) < 0:
+                if np.dot(normal1, np.array(normal2)) < 0:
                     triangles[m][0], triangles[m][1] = triangles[m][1], triangles[m][0]
                 F1 = np.concatenate(
                     (F1, np.array([[loops[loop_id][int(triangles[m][0])], loops[loop_id][int(triangles[m][1])],
@@ -1353,8 +1342,36 @@ def reverse_loop(start, loop):
         return loop[::-1]
 
 
+scale = 2 * math.pi
+MAX_TRIS_FOR_STEP = 50000
+SNAP_TOL = 1e-6
+size = 1
+resolution = 100
 
+# For sheet based TPMS:
+# There is a correlation between c_value and thickness. Some combination of c and thickness would bcause the invalid
+# structure (error in the code). So the range of the c and thickness need to be modified.
+# The current version of sample range of c_value and thickness is ok to direct run without error.
+# If you want to explore more range for c and thickness, please adjust it.
+# When meeting invlid structure, you can use continue to pass this combination
+# you need to check the generated sheet based structure too.
 
+# Please note that the function of t and c is -t<f(x,y,z)-c<t, the actual thickness is 2t.
 
+import math
+MAX_TRIS_FOR_STEP = 50000
+SNAP_TOL = 1e-6
+scale = 2 * math.pi
+def Skeletal_Primitive(C, t, a1,a2, resolution = 200, folder='all_files'):
+    
+    
+    V, F = generate_iso_mesh(1, resolution, scale, C, kind='p', mode='skeletal', thickness=t)
+    V = snap_to_cube_planes(V, SNAP_TOL)
+    V, F = decimate_and_clean(V, F, MAX_TRIS_FOR_STEP)
+    V, F = build_end_caps(V, F, tol=SNAP_TOL, kind='p', direction='normal',mode='skeletal')
+    rotate(V,a1,a2,0) 
+    filename = f"36Skeletal_Primitive_{C:.1f}_{a1}_{a2}.stl"  # Format filename with the c value
+    cached_file = create_stl_from_mesh(V,F,folder,filename)
+    return f"{folder}/{filename}"    
 
-
+Skeletal_Primitive(0,0.1,45,45)

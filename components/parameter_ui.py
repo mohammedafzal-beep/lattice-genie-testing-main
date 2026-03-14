@@ -1,17 +1,20 @@
 
 import streamlit as st
 from utils.utils import labeled_slider,generate_stl
-from streamlit_stl import stl_from_file
 from utils.dataloader import log_event,log_slider_changes
 import time
 from utils.S_V_ratio import surface_area_to_volume_ratio, vol_ratio
 from utils.dataloader import log_submission
 
 def show_parameter_sliders(data,mode):
+    if mode == 'Pro mode':
+            dict_key = st.session_state['selected_dict_key']
+    else:
+        dict_key = int(st.session_state['dict_key'])
+    
     with st.sidebar:
-        st.markdown("---")
-        
-        with st.columns([1,6,1])[1]:
+    
+        with st.columns([2,6,1])[1]:
             st.markdown(
     "<h2 style=' color: #007BFF; font-size: 28px;'>Adjust parameters</h2>",
     unsafe_allow_html=True
@@ -25,19 +28,14 @@ def show_parameter_sliders(data,mode):
         
         with st.columns([1,13,1])[1]: 
             st.session_state['Scroll message'] = st.empty()
+
+        with st.columns([1,13,1])[1]: 
+            st.session_state['Struc error'] = st.empty()
         
         st.session_state['S_V_ratio'] = st.empty()
 # Reserve space for the button right under the heading
         
-
-
         # --- Sliders ---
-        if mode == 'Pro mode':
-            dict_key = st.session_state['selected_dict_key']
-        else:
-            confirmed = st.session_state['confirmed_params']
-            dict_key = int(confirmed.get('dict_key', -1))
-            st.session_state['dict_key'] = dict_key
         struc_name = data['dict_key_map'].get(dict_key, 'Unknown Structure')
         with st.session_state['struc_name']:
                 
@@ -136,56 +134,56 @@ unsafe_allow_html=True
 )
 
         path = generate_stl(dict_key, current_params)
-        with st.session_state['S_V_ratio']:
-            st.markdown(f"""
-<div style="
-    color: #ffffff;
-    font-size: 19px;
-    text-align: left;
-    margin-bottom: 20px;
-">
-    <span style="font-weight: 600;">Volume Ratio (VR):</span>
-    <span style="
-        display: inline-block;
-        padding: 4px 10px;
-        background: #e0e0e0;
-        color: #00aa00;
-        border-radius: 6px;
-        font-weight: bold;
-        margin-left: 12px;
+        if path == 0:
+            with st.session_state['Struc error']:
+                st.markdown("<p style='font-size:17px'>❌ Generation is not possible with the set parameter values <br> \
+                Please avoid extreme angle values (eg: 1, 360 etc) </p> ", unsafe_allow_html= True)
+            else:
+            with st.session_state['S_V_ratio']:
+                st.markdown(f"""
+    <div style="
+        color: #ffffff;
+        font-size: 19px;
+        text-align: left;
+        margin-bottom: 20px;
     ">
-        {vol_ratio(path)}
-    </span>
-</div>
+        <span style="font-weight: 600;">Volume Ratio (VR):</span>
+        <span style="
+            display: inline-block;
+            padding: 4px 10px;
+            background: #e0e0e0;
+            color: #00aa00;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-left: 12px;
+        ">
+            {vol_ratio(path)}
+        </span>
+    </div>
 
-<div style="
-    color: #ffffff;
-    font-size: 19px;
-    text-align: left;
-    margin-bottom: 20px;
-">
-    <span style="font-weight: 600;">Surface Area to Volume (SA/V) Ratio:</span>
-    <span style="
-        display: inline-block;
-        padding: 4px 10px;
-        background: #e0e0e0;
-        color: #00aa00;
-        border-radius: 6px;
-        font-weight: bold;
-        margin-left: 12px;
+    <div style="
+        color: #ffffff;
+        font-size: 19px;
+        text-align: left;
+        margin-bottom: 20px;
     ">
-        {surface_area_to_volume_ratio(path)}
-    </span>
-</div>
-""", unsafe_allow_html=True)
-        st.session_state['stl_path'] = path
-        st.session_state['stl_generated'] = True
-        st.session_state["dict_key"] = dict_key
-        
-        
-
-        if st.session_state.get('stl_generated'):
-
+        <span style="font-weight: 600;">Surface Area to Volume (SA/V) Ratio:</span>
+        <span style="
+            display: inline-block;
+            padding: 4px 10px;
+            background: #e0e0e0;
+            color: #00aa00;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-left: 12px;
+        ">
+            {surface_area_to_volume_ratio(path)}
+        </span>
+    </div>
+    """, unsafe_allow_html=True)
+            st.session_state['stl_path'] = path
+            st.session_state["dict_key"] = dict_key
+            st.session_state['stl_generated'] = True
             with st.session_state['struc_name']:
                 st.markdown(f"""
                 <div style="position: relative; display: inline-block; margin-bottom: 2px;">
@@ -194,43 +192,6 @@ unsafe_allow_html=True
                 </div>""", unsafe_allow_html = True)
 
             st.session_state['spinner'].empty()  # Clear the message after displaying
-            
-            st.session_state['stl_display'] = True
-        
-    if mode == 'Chat mode' and st.session_state['stl_display']:
-        SCALING_FACTOR = 100
-        if st.session_state['dict_key'] == 4:
-                SCALING_FACTOR = 2.4
-        elif st.session_state['dict_key'] == 29:
-                SCALING_FACTOR = 1.58
-        stl_from_file(st.session_state['stl_path'],st.session_state.get('stl_color', '#336fff'), 
-                        auto_rotate=True, height=500,cam_distance=SCALING_FACTOR*(current_params['resolution']/50),
-                        cam_h_angle=45,cam_v_angle=75)
-                
-        with st.session_state['Scroll message']:
-                st.markdown("<p style='font-size:17px'>✅ STL Generated! Scroll down to view <br> \
-                ⬇️ Download using button below </p> ", unsafe_allow_html= True)
-        
-        time.sleep(4)
-        st.session_state['Scroll message'].empty()
-        
-        '''design_ques_tab = st.columns([1, 1, 1])
-        design_ques_list = ["Task 1","Task 2","Task 3","Task 4",]
-        with design_ques_tab[1]:
-            design_ques = st.selectbox("Design Task", design_ques_list, index=0)
-            log_event(design_ques,'Chat mode')'''
-        download_submit_tab = st.columns([1.7, 1, 1])
-        
-                
-        with open(st.session_state['stl_path'], 'rb') as f:
-            
-            with download_submit_tab[1]:
-                st.download_button('⬇️ Download STL', data=f.read(), file_name=st.session_state['stl_path'], mime='model/stl')
-                
-                log_event("Download", 'Chat mode')
-        
-        """with download_submit_tab[2]:
-            if st.button('Submit'):
-                struc_info = st.session_state['dict_key'] + st.session_state['current_params']
-                log_submission(struc_info,
-                design_ques, 'Chat Mode')"""
+
+
+

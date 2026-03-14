@@ -68,8 +68,13 @@ def Inverse_Mono_BaseCent(a, b, c, alpha, beta, gamma, face_atom_radius=0.37, r=
         for normal_vector, D in plane_equation.values():
             values[np.round(normal_vector[0]*x + normal_vector[1]*y + normal_vector[2]*z + D, 3) == 0] = -1
 
-        verts, faces, _, _ = measure.marching_cubes(values, level=0)
-        verts = np.dot(verts, T)
+         try:
+            verts, faces, _, _ = measure.marching_cubes(values, level=0)
+            verts = np.dot(verts, T)
+        except RuntimeError:
+            a = 0
+            b = 0
+            return a, b
 
         return verts, faces
 
@@ -110,5 +115,7 @@ def Inverse_Mono_BaseCent(a, b, c, alpha, beta, gamma, face_atom_radius=0.37, r=
     cached_file = os.path.join(folder, filename) 
 
     verts, faces = generate_solid_volume(resolution, atom_positions, T, r, face_atom_radius, a, b, c, plane_equation)
+    if verts == 0 and faces == 0:
+        return 0
     create_stl_from_mesh(verts, faces, folder, filename) 
     return cached_file

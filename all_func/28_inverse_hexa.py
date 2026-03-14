@@ -64,8 +64,14 @@ def Inverse_Hexa(a, b, c, r=0.75, alpha=90, beta=90, gamma=120,    resolution = 
         if not (vmin <= 0 <= vmax):
             raise ValueError(f"No isosurface at level 0: value range = ({vmin:.3f}, {vmax:.3f})")
 
-        verts, faces, _, _ = measure.marching_cubes(values, level=0)
-        verts = verts @ T
+         try:
+            verts, faces, _, _ = measure.marching_cubes(values, level=0)
+            verts = np.dot(verts, T)
+        except RuntimeError:
+            a = 0
+            b = 0
+            return a, b
+        
         return verts, faces
 
     def create_stl(verts, faces, folder, filename):
@@ -99,5 +105,7 @@ def Inverse_Hexa(a, b, c, r=0.75, alpha=90, beta=90, gamma=120,    resolution = 
     cached_file = os.path.join(folder, filename) 
 
     verts, faces = generate_solid_volume(resolution, atom_positions, T, r, a, b, c, plane_equation)
+    if verts == 0 and faces == 0:
+        return 0
     create_stl(verts, faces, folder, filename) 
     return cached_file

@@ -347,10 +347,12 @@ Also mention that:
 💡 Tip 1: the S/V ratio and VR ratio depends on other parameters, so their values can only be changed by tweaking other paramters values below it
 💡 Tip 2: The users can try lower resolution for experimentation, and use max resolution before downloading the STL file
 (Dont write both in the same line, write in 2 different lines)
+This is a note to yourself that if the user asks to generate a structure with a particular value of S/V ratio and/or VR, resolution, any other parameter,
+you MUST explicitly tell the user that these values can only be changed in the slider column.
 
 If the desired lattice structures are beyond your expertise, first check thouroughly if that crystal type is convered in this instruction prompt above 
 and if you still couldn't find it, only then you will tell users it's beyond your expertise and your developer will consider adding this use type in the future.
- 
+
  ONLY AFTER the desired crystal type is comfirmed, output the dict_key of the crystal into the below json formatted output:
 {
     "dict_key":"int",  
